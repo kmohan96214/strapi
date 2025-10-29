@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "audit_logs",
+  "info": {
+    "singularName": "audit-log",
+    "pluralName": "audit-logs",
+    "displayName": "Audit Log",
+    "description": "Audit logs for content changes"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": "Audit logs for content changes"
+  },
+  "pluginOptions": {
+    "content-manager": {
+      "visible": false
+    },
+    "content-type-builder": {
+      "visible": false
+    }
+  },
+  "attributes": {
+    "action": {
+      "type": "enumeration",
+      "enum": ["create", "update", "delete"],
+      "required": true
+    },
+    "contentType": {
+      "type": "string",
+      "required": true
+    },
+    "entityId": {
+      "type": "string",
+      "required": true
+    },
+    "userId": {
+      "type": "string"
+    },
+    "payload": {
+      "type": "json"
+    },
+    "previousData": {
+      "type": "json"
+    },
+    "timestamp": {
+      "type": "datetime",
+      "required": true,
+      "default": "now"
+    }
+  },
+  "indexes": [
+    {
+      "name": "audit_logs_content_type_entity_id",
+      "columns": ["contentType", "entityId"]
+    },
+    {
+      "name": "audit_logs_user_id",
+      "columns": ["userId"]
+    },
+    {
+      "name": "audit_logs_action",
+      "columns": ["action"]
+    },
+    {
+      "name": "audit_logs_timestamp",
+      "columns": ["timestamp"]
+    }
+  ]
+}
